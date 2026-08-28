@@ -1,0 +1,30 @@
+[project]
+name = "equipit-django"
+version = "0.1.0"
+description = "Equipment lending web application"
+requires-python = ">=3.14"
+dependencies = [
+    "Django>=6.0,<7.0",
+    "djangorestframework>=3.16,<4.0",
+    "drf-spectacular>=0.29,<1.0",
+    "psycopg[binary]>=3.2,<4.0",
+    "python-dotenv>=1.1,<2.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4,<9.0",
+    "pytest-django>=4.11,<5.0",
+    "ruff>=0.12,<1.0",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+[tool.ruff]
+line-length = 100
+exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
