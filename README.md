@@ -16,6 +16,7 @@ SQLite is used automatically for local development when `DATABASE_URL` is not de
 uv sync
 cp .env.example .env
 uv run python manage.py migrate
+uv run python manage.py createsuperuser
 ```
 
 ## Run
