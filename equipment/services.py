@@ -33,12 +33,14 @@ class EquipmentService:
         equipment.borrower_first_name = first_name.strip()
         equipment.borrower_last_name = last_name.strip()
         equipment.borrowed_at = timezone.now()
+        equipment.returned_at = None
         equipment.save(
             update_fields=[
                 "is_available",
                 "borrower_first_name",
                 "borrower_last_name",
                 "borrowed_at",
+                "returned_at",
             ]
         )
         return equipment
