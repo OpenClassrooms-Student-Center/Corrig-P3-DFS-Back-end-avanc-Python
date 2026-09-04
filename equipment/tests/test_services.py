@@ -31,8 +31,11 @@ def test_borrowing_unavailable_equipment_fails():
 @pytest.mark.django_db
 def test_return_equipment_clears_borrower_details():
     equipment = Equipment.objects.create(
-        name="Laptop", category="Computer", is_available=False,
-        borrower_first_name="Ada", borrower_last_name="Lovelace",
+        name="Laptop",
+        category="Computer",
+        is_available=False,
+        borrower_first_name="Ada",
+        borrower_last_name="Lovelace",
     )
 
     returned = EquipmentService().return_equipment(equipment.id)
