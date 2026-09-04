@@ -1,3 +1,4 @@
+from enum import StrEnum
 from rest_framework import generics, status
 from rest_framework.response import Response
 
@@ -9,6 +10,11 @@ from .services import (
     EquipmentService,
     EquipmentUnavailableError,
 )
+
+
+class EquipmentAction(StrEnum):
+    BORROW = "borrow"
+    RETURN = "return"
 
 
 class EquipmentListView(generics.ListAPIView):
@@ -23,11 +29,11 @@ class EquipmentDetailView(generics.GenericAPIView):
     def put(self, request, equipment_id, action):
         service = EquipmentService()
         try:
-            if action == "borrow":
+            if action == EquipmentAction.BORROW:
                 serializer = BorrowRequestSerializer(data=request.data)
                 serializer.is_valid(raise_exception=True)
                 equipment = service.borrow_equipment(equipment_id, **serializer.validated_data)
-            elif action == "return":
+            elif action == EquipmentAction.RETURN:
                 equipment = service.return_equipment(equipment_id)
             else:
                 return Response({"detail": "Unknown action."}, status=status.HTTP_404_NOT_FOUND)
