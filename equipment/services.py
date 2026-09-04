@@ -33,12 +33,14 @@ class EquipmentService:
         equipment.borrower_first_name = first_name.strip()
         equipment.borrower_last_name = last_name.strip()
         equipment.borrowed_at = timezone.now()
-        equipment.save(update_fields=[
-            "is_available",
-            "borrower_first_name",
-            "borrower_last_name",
-            "borrowed_at",
-        ])
+        equipment.save(
+            update_fields=[
+                "is_available",
+                "borrower_first_name",
+                "borrower_last_name",
+                "borrowed_at",
+            ]
+        )
         return equipment
 
     @transaction.atomic
@@ -51,10 +53,12 @@ class EquipmentService:
         equipment.borrower_first_name = ""
         equipment.borrower_last_name = ""
         equipment.returned_at = timezone.now()
-        equipment.save(update_fields=[
-            "is_available",
-            "borrower_first_name",
-            "borrower_last_name",
-            "returned_at",
-        ])
+        equipment.save(
+            update_fields=[
+                "is_available",
+                "borrower_first_name",
+                "borrower_last_name",
+                "returned_at",
+            ]
+        )
         return equipment

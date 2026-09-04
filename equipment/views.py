@@ -34,8 +34,12 @@ class EquipmentDetailView(generics.GenericAPIView):
         except EquipmentNotFoundError:
             return Response({"detail": "Equipment not found."}, status=status.HTTP_404_NOT_FOUND)
         except EquipmentUnavailableError:
-            return Response({"detail": "Equipment is already borrowed."}, status=status.HTTP_409_CONFLICT)
+            return Response(
+                {"detail": "Equipment is already borrowed."}, status=status.HTTP_409_CONFLICT
+            )
         except EquipmentAlreadyAvailableError:
-            return Response({"detail": "Equipment is already available."}, status=status.HTTP_409_CONFLICT)
+            return Response(
+                {"detail": "Equipment is already available."}, status=status.HTTP_409_CONFLICT
+            )
 
         return Response(EquipmentSerializer(equipment).data, status=status.HTTP_200_OK)
