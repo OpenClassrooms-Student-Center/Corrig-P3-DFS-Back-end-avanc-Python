@@ -1,4 +1,7 @@
 from enum import StrEnum
+
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import generics, status
 from rest_framework.response import Response
 
@@ -26,6 +29,16 @@ class EquipmentDetailView(generics.GenericAPIView):
     queryset = Equipment.objects.all()
     serializer_class = EquipmentSerializer
 
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="action",
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.PATH,
+                enum=[action.value for action in EquipmentAction],
+            )
+        ],
+    )
     def put(self, request, equipment_id, action):
         service = EquipmentService()
         try:
